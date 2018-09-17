@@ -59,3 +59,28 @@
 
 (def app
   (wrap-defaults app-routes site-defaults))
+
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; REPL experiments
+
+
+;; A quick test of some SVG code to check it renders okay in the static page
+;; This is a bit of code taken from ClojureBridge London workshop,
+;; used with ClojureScript and Reagent.  It just works in Clojure too :)
+
+#_(defn display-cpu-load-average
+    "Graphical representation of CPU average load"
+    [cpu-load-average]
+    [:svg {:style {:border "1px solid"
+                   :background "white"
+                   :width "150px"
+                   :height "150px"}}
+     [:circle {:r 50, :cx 75, :cy 75, :fill "green"}]
+     [:circle {:r 25, :cx 75, :cy 75, :fill "blue"}]
+     [:path {:stroke-width 12
+             :stroke "white"
+             :fill "none"
+             :d "M 30,40 C 100,40 50,110 120,110"}]])
