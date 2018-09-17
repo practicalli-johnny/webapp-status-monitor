@@ -5,8 +5,12 @@
             [hiccup.core :refer :all]
             [hiccup.page :refer :all]))
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Main page for application
+
 (defn monitor-dashboard
-  "Returns a mock dashboard page"
+  "Returns a mock dashboard page using Hiccup and Bootstrap"
   [request]
   (html5 {:ng-app "Mock Status Monitor Web App" :lang "en"}
          [:head
@@ -37,9 +41,21 @@
               [:h2 "Messaging monitor"]]]]]]))
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Application routing
+
 (defroutes app-routes
   (GET "/" [] monitor-dashboard)
   (route/not-found "Not Found"))
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Application entry point
+;; app is injected into an embedded Jetty process by lein ring server
+;; or by an automatically generated -main function by lein uberjar
+;;
+;; To understand wrap-defaults and site-defaults, review
+;; https://github.com/ring-clojure/ring-defaults
 
 (def app
   (wrap-defaults app-routes site-defaults))
