@@ -7,6 +7,49 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Status components using Hiccup and SVG
+
+;; There is a limited number of examples of writing SVG in Clojure Hiccup style.
+;; To find out the syntax, i used the SVG specification and translated the elements
+;; into Clojure vectors, maps and keywords.
+;; https://developer.mozilla.org/en-US/docs/Web/SVG/Element
+
+;; Defining a view-box gives an overall size to the SVG graphic relative to the page.
+;; Without the view-box the graphic is given a default 300x150px size and leaves a lot of
+;; space in between the components.
+
+
+(defn component-status-bar
+  "Generate an SVG static progress bar
+
+  The progress bar is made from a rectangle with rounded corners for asthetics.
+  The rectangle has a boarder, as defined by the :stroke value.
+
+  The rectangle is wrapped with a :view-box to control the size of the generated SVG image.
+  Without this :view-box the graphic would be a default size of 300x150px, leaving a
+  large gap between images.
+
+  The width of the status bar is controlled by the percentage argument.
+  TODO: design a way to set status thresholds for specific types of monitor."
+
+  [percentage]
+  [:svg {:view-box "0 0 100 20"
+         :width 202
+         :height 22}
+   [:rect {:x 1
+           :y 1
+           :width percentage
+           :height 20
+           :rx 5 :ry 5
+           :stroke "black"
+           :fill (cond
+                   (< percentage 50) "green"
+                   (< percentage 60) "orange"
+                   (>= percentage 70) "red"
+                   :else "grey")}]])
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Main page for application
 
 (defn monitor-dashboard
@@ -29,16 +72,35 @@
             [:div {:class "jumbotron"}
              [:h1 "Mock Status Monitor Dashboard"]]
 
-            ;; Key systems to monitor displayed in a single row grid
+            ;; Key systems to monitor displayed in a single bootstrap row, with 3 columns.
             [:div {:class "row"}
-             [:div {:class "col-md-4"}
-              [:h2 "Application monitor"]]
 
              [:div {:class "col-md-4"}
-              [:h2 "Database monitor"]]
+              [:h2 "Application monitor"]
+              [:p "CPU load average:"
+               (component-status-bar 9)]
+              [:p "Memory used:"
+               (component-status-bar 55)]
+              [:p "Swap used:"
+               (component-status-bar 36)]]
 
              [:div {:class "col-md-4"}
-              [:h2 "Messaging monitor"]]]]]]))
+              [:h2 "Database monitor"]
+              [:p "CPU load average:"
+               (component-status-bar 10)]
+              [:p "Tablespace DATA:"
+               (component-status-bar 55)]
+              [:p "Tablespace INDEX:"
+               (component-status-bar 85)]]
+
+             [:div {:class "col-md-4"}
+              [:h2 "Messaging monitor"]
+              [:p "Asynchronous storage:"
+               (component-status-bar 74)]
+              [:p "Server memory usage:"
+               (component-status-bar 75)]
+              [:p "Durable pending messages"
+               (component-status-bar 92)]]]]]]))
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
