@@ -6,6 +6,19 @@
             [hiccup.page :refer :all]))
 
 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Mock data generators
+
+(defn mock-data
+  "Mock data generator"
+  [maximum-value]
+  (if (float? maximum-value)
+    (format "%.2f" (rand (+ maximum-value 1)))
+    (rand-int (+ maximum-value 1))))
+
+
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Status components using Hiccup and SVG
 
@@ -146,3 +159,65 @@
              :stroke "white"
              :fill "none"
              :d "M 30,40 C 100,40 50,110 120,110"}]])
+
+
+
+;; Mock data generators
+
+#_(defn mock-data
+  "Mock data generator"
+  [maximum-value]
+  (rand (+ maximum-value 1)))
+
+
+#_(mock-data 10)
+;; => 1.7532050382877502
+
+
+#_(defn mock-data
+  "Mock data generator"
+  [maximum-value]
+  (if (float? maximum-value)
+    (rand (+ maximum-value 1))
+    (rand-int (+ maximum-value 1))))
+
+;; Passing an integer number returns a random integer.
+(mock-data 10)
+;; => 8
+
+;; Passing a float number returns a float.
+(mock-data 10.0)
+;; => 7.3488245303455635
+
+;; I want to limit a float to a maximum of 2 decimal places
+
+
+#_(defn mock-data
+  "Mock data generator"
+  [maximum-value]
+  (if (float? maximum-value)
+    (with-precision 2 (rand (+ maximum-value 1)))
+    (rand-int (+ maximum-value 1))))
+
+
+(mock-data 10.0);; => 9.735358290172472
+;; with-precision only works with BigDecimal type.
+
+(clojure.pprint.cl-format 3 9.735358290172472)
+;; symbol not found.
+
+
+(format "%.2f" 9.735358290172472)
+;; => "9.74"
+
+
+#_(defn mock-data
+  "Mock data generator"
+  [maximum-value]
+  (if (float? maximum-value)
+    (format "%.2f" (rand (+ maximum-value 1)))
+    (rand-int (+ maximum-value 1))))
+
+
+(mock-data 10.0)
+;; => "6.02"
