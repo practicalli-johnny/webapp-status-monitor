@@ -203,7 +203,7 @@
 (mock-data 10.0);; => 9.735358290172472
 ;; with-precision only works with BigDecimal type.
 
-(clojure.pprint.cl-format 3 9.735358290172472)
+#_(clojure.pprint.cl-format 3 9.735358290172472)
 ;; symbol not found.
 
 
