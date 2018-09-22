@@ -120,7 +120,8 @@
 ;; Application routing
 
 (defroutes app-routes
-  (GET "/" [] monitor-dashboard)
+  (GET "/" [] "Hello World")
+  (GET "/dashboard" [] monitor-dashboard)
   (route/not-found "Not Found"))
 
 
