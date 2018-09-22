@@ -220,5 +220,10 @@
     (rand-int (+ maximum-value 1))))
 
 
-(mock-data 10.0)
+#_(mock-data 10.0)
 ;; => "6.02"
+
+
+
+#_(component-status-bar 50)
+;; => [:svg {:view-box "0 0 100 20", :width 202, :height 22} [:rect {:x 1, :y 1, :width 50, :height 20, :rx 5, :ry 5, :stroke "black", :fill "orange"}]]
