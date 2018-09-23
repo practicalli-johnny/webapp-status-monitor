@@ -6,7 +6,8 @@
                  [compojure "1.6.1"]
                  [ring/ring-defaults "0.3.2"]
                  [hiccup "1.0.5"]]
-  :plugins [[lein-ring "0.12.4"]]
+  :plugins [[lein-ring "0.12.4"]
+            [lein-eftest "0.5.3"]]
   :ring {:handler status-monitor.handler/app}
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
