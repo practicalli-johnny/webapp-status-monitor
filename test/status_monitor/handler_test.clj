@@ -1,4 +1,21 @@
 (ns status-monitor.handler-test
+  ^{:author "John Stevenson"
+    :doc "Testing using clojure.test library.
+
+         Unit testing in Clojure is focused on testing individual
+         functions.  The clojure.test function provides the is
+         macro that is comparable to assert in other test libraries.
+
+         In general, the values compared in an assertion can be written
+         either way around.  For best results in CIDER testing, the
+         expected value should be first.
+
+         The testing macro defines context for one or more assertions
+         in a string describing the purpose of those assertions.
+
+         The deftest macro contains test contexts and assertions,
+         grouping the tests for a particular public function."}
+
   (:require [clojure.test :refer :all]
             [ring.mock.request :as mock]
             [status-monitor.handler :refer :all]))
