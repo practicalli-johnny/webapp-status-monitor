@@ -3,6 +3,18 @@
 [![CircleCI](https://circleci.com/gh/jr0cket/webapp-status-monitor.svg?style=svg)](https://circleci.com/gh/jr0cket/webapp-status-monitor)
 
 
+```
+         )             )                                                )
+      ( /(      )   ( /(     (              )                   (    ( /(         (
+ (    )\())  ( /(   )\())   ))\   (        (       (     (      )\   )\())   (    )(
+ )\  (_))/   )(_)) (_))/   /((_)  )\       )\  '   )\    )\ )  ((_) (_))/    )\  (()\
+((_) | |_   ((_)_  | |_   (_))(  ((_)    _((_))   ((_)  _(_/(   (_) | |_    ((_)  ((_)
+(_-< |  _|  / _` | |  _|  | || | (_-<   | '  \() / _ \ | ' \))  | | |  _|  / _ \ | '_|
+/__/  \__|  \__,_|  \__|   \_,_| /__/   |_|_|_|  \___/ |_||_|   |_|  \__|  \___/ |_|
+
+```
+
+
 A simple Status Monitor that mocks the type of information that is typically useful from several sources of monitoring systems.
 
 The main purpose is a to demonstrate a simple server side website with Scalable Vector Graphics.
