@@ -18,7 +18,8 @@
 
   (:require [clojure.test :refer :all]
             [ring.mock.request :as mock]
-            [status-monitor.handler :refer :all]))
+            [status-monitor.handler :refer :all]
+            [clojure.string :as string]))
 
 (deftest test-app
   (testing "main route"
@@ -50,21 +51,22 @@
       (is (= (component-status-bar 50)
              component-50-per-cent)))))
 
+
 (deftest test-monitor-dashboard
   (testing "Test dashboard contains key pieces of information"
-    (is (clojure.string/includes?
-         (monitor-dashboard {})
-         "<title>Area51 Mock Status</title>"))
-    (is (clojure.string/includes?
-         (monitor-dashboard {})
-         "<link href=\"//stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\">"))
-    (is (clojure.string/includes?
-         (monitor-dashboard {}) "<div class=\"jumbotron\"><h1>Mock Status Monitor Dashboard</h1></div>"))
-    (is (clojure.string/includes?
-         (monitor-dashboard {}) "<h2>Application monitor</h2>"))
-    (is (clojure.string/includes?
-         (monitor-dashboard {})
-         "view-box=\"0 0 100 20\""))))
+    (let [response (app (mock/request :get "/dashboard"))]
+      (is (= (:status response) 200))
 
-;; Refactor the above test to use a let value for the response from calling monitor-dashboard
-;; Also consider using the (app (mock/request :get "/")) call in the let and comparing the :body from the response.
+      (is (string/includes?
+          (:body response)
+           "<title>Area51 Mock Status</title>"))
+      (is (string/includes?
+           (:body response)
+           "<link href=\"//stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\">"))
+      (is (string/includes?
+           (:body response) "<div class=\"jumbotron\"><h1>Mock Status Monitor Dashboard</h1></div>"))
+      (is (string/includes?
+           (:body response) "<h2>Application monitor</h2>"))
+      (is (string/includes?
+           (:body response)
+           "view-box=\"0 0 100 20\"")))))
