@@ -3,7 +3,8 @@
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [hiccup.core :refer :all]
-            [hiccup.page :refer :all]))
+            [hiccup.page :refer :all]
+            [status-monitor.svg-components :as svg-components]))
 
 
 
@@ -113,7 +114,17 @@
               [:p "Server memory usage:"
                (component-status-bar 75)]
               [:p "Durable pending messages"
-               (component-status-bar 92)]]]]]]))
+               (component-status-bar 92)]]
+
+             ]
+
+            ;; Testing SVG components.
+            [:div {:class "row"}
+             [:h1 "Demo"]
+             [:div {:class "col-md-12"}
+              svg-components/circle-in-a-box]
+             ]]]]))
+
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
