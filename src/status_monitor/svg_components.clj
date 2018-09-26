@@ -13,9 +13,26 @@
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Demos
+;; Element Demos
 
 
+
+(defn web-link
+  [website-URL]
+  [:a {:href website-URL
+       :target "_blank"}
+   (str website-URL)])
+
+(defn image
+  [image-URL]
+  [:img {:src image-URL
+         :alt "Image description"}])
+
+(defn image-linked
+  [image-URL website-URL]
+  [:a {:href website-URL}
+   [:img {:src image-URL
+          :target "_blank"}]])
 
 ;; Circle in a box
 (def circle-in-a-box
@@ -48,3 +65,23 @@
 ;;   <circle cx="150" cy="100" r="80" fill="green" />
 ;;   <text x="150" y="125" font-size="60" text-anchor="middle" fill="white">SVG</text>
 ;; </svg>
+
+
+
+;; Clojure logo
+
+(def curved-lambda-logo
+  [:svg {:style {:border "1px solid"
+                 :background "white"
+                 :width "150px"
+                 :height "150px"}}
+   [:circle {:r 50, :cx 75, :cy 75, :fill "green"}]
+   [:circle {:r 25, :cx 75, :cy 75, :fill "blue"}]
+   [:path {:stroke-width 12
+           :stroke "white"
+           :fill "none"
+           :d "M 30,40 C 100,40 50,110 120,110"}]
+   [:path {:stroke-width 12
+           :stroke "white"
+           :fill "none"
+           :d "M 75,75 C 50,90 50,110 35,110"}]])

@@ -123,6 +123,16 @@
              [:h1 "Demo"]
              [:div {:class "col-md-12"}
               svg-components/circle-in-a-box]
+             [:div {:class "col-md-12"}
+              (svg-components/web-link "https://practicalli.github.io")]
+             [:div {:class "col-md-12"}
+              (svg-components/image
+               "https://raw.githubusercontent.com/jr0cket/london-clojurians-logo/master/london-clojurians-logo.png")]
+             [:div {:class "col-md-12"}
+              (svg-components/image-linked
+               "https://raw.githubusercontent.com/jr0cket/london-clojurians-logo/master/london-clojurians-logo.png"
+               "http://ldnclj.org")]
+
              ]]]]))
 
 
