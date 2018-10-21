@@ -134,10 +134,8 @@
 ;; color the line will not be visible -->
 ;; </svg>
 
-[]
-[
 
-:line { x1="0" y1="80" x2="100" y2="20" stroke="black"}
+;; {:line { x1="0" y1="80" x2="100" y2="20" stroke="black"}
 
 
 ;; polygon
