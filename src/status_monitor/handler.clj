@@ -2,8 +2,8 @@
   (:require [compojure.core :refer [defroutes GET]]
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
-            [hiccup.page :refer :as web-page]
-            [hiccup.form :refer :as web-form]
+            [hiccup.page :as web-page]
+            [hiccup.form :as web-form]
             [status-monitor.svg-components :as svg-components]))
 
 
