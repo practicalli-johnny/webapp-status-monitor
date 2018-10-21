@@ -2,8 +2,8 @@
   (:require [compojure.core :refer [defroutes GET]]
             [compojure.route :as route]
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
-            [hiccup.core :refer :all]
-            [hiccup.page :refer :all]
+            [hiccup.page :refer :as web-page]
+            [hiccup.form :refer :as web-form]
             [status-monitor.svg-components :as svg-components]))
 
 
@@ -69,14 +69,15 @@
 (defn monitor-dashboard
   "Returns a mock dashboard page using Hiccup and Bootstrap"
   [request]
-  (html5 {:ng-app "Mock Status Monitor Web App" :lang "en"}
+  (web-page/html5 {:ng-app "Mock Status Monitor Web App"
+                   :lang "en"}
          [:head
-          [:title "Area51 Mock Status"]
+          [:title "ACME Infrastructure Mock Status"]
 
           ;; Bootstrap CSS and JavaScript libraries from the Content Delivery Network
-          (include-css "//stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css")
-          (include-js  "//stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js")
-          (include-js  "//stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js")
+          (web-page/include-css "//stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css")
+          (web-page/include-js  "//stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js")
+          (web-page/include-js  "//stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js")
 
           [:body
            ;; An invisible container to create a default margin at each side of the web page
