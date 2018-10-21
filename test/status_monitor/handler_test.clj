@@ -59,7 +59,7 @@
 
       (is (string/includes?
           (:body response)
-           "<title>Area51 Mock Status</title>"))
+           "<title>ACME Infrastructure Mock Status</title>"))
       (is (string/includes?
            (:body response)
            "<link href=\"//stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\">"))
