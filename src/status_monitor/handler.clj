@@ -62,6 +62,12 @@
                    :else "grey")}]])
 
 
+;; Data centre locations
+(def data-centre-locations
+  [{:name "London"    :latitude 42 :longtitude 24}
+   {:name "New York"  :latitude 42 :longtitude 24}
+   {:name "Singapore" :latitude 42 :longtitude 24}])
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Main page for application
 
@@ -91,7 +97,12 @@
      [:div {:class "row"}
       [:div {:class "col-md-12"}
        [:h2 "ACME Infrastructure Locations"]
-       (web-form/drop-down ["London" "New York"] ["London" "New York"]) ]]
+       [:form {:action "/dashboard"}
+        [:td
+         [:select
+          (for [location data-centre-locations]
+            [:option {:value (:name location)} (:name location)])]
+         [:input {:type "submit"} "Monitor Location"]]]]]
 
      ] ;; End of :div container
     ] ;; End of :body
@@ -290,3 +301,14 @@
 ;; Output of monitor-dashboard component when called with an empty request (an empty map).
 (monitor-dashboard {})
 ;; => "<!DOCTYPE html>\n<html lang=\"en\" ng-app=\"Mock Status Monitor Web App\"><head><title>Area51 Mock Status</title><link href=\"//stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\"><script src=\"//stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js\" type=\"text/javascript\"></script><script src=\"//stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js\" type=\"text/javascript\"></script><body><div class=\"container\"><div class=\"jumbotron\"><h1>Mock Status Monitor Dashboard</h1></div><div class=\"row\"><div class=\"col-md-4\"><h2>Application monitor</h2><p>CPU load average:<svg height=\"22\" view-box=\"0 0 100 20\" width=\"202\"><rect fill=\"green\" height=\"20\" rx=\"5\" ry=\"5\" stroke=\"black\" width=\"9\" x=\"1\" y=\"1\"></rect></svg></p><p>Memory used:<svg height=\"22\" view-box=\"0 0 100 20\" width=\"202\"><rect fill=\"orange\" height=\"20\" rx=\"5\" ry=\"5\" stroke=\"black\" width=\"55\" x=\"1\" y=\"1\"></rect></svg></p><p>Swap used:<svg height=\"22\" view-box=\"0 0 100 20\" width=\"202\"><rect fill=\"green\" height=\"20\" rx=\"5\" ry=\"5\" stroke=\"black\" width=\"36\" x=\"1\" y=\"1\"></rect></svg></p></div><div class=\"col-md-4\"><h2>Database monitor</h2><p>CPU load average:<svg height=\"22\" view-box=\"0 0 100 20\" width=\"202\"><rect fill=\"green\" height=\"20\" rx=\"5\" ry=\"5\" stroke=\"black\" width=\"10\" x=\"1\" y=\"1\"></rect></svg></p><p>Tablespace DATA:<svg height=\"22\" view-box=\"0 0 100 20\" width=\"202\"><rect fill=\"orange\" height=\"20\" rx=\"5\" ry=\"5\" stroke=\"black\" width=\"55\" x=\"1\" y=\"1\"></rect></svg></p><p>Tablespace INDEX:<svg height=\"22\" view-box=\"0 0 100 20\" width=\"202\"><rect fill=\"red\" height=\"20\" rx=\"5\" ry=\"5\" stroke=\"black\" width=\"85\" x=\"1\" y=\"1\"></rect></svg></p></div><div class=\"col-md-4\"><h2>Messaging monitor</h2><p>Asynchronous storage:<svg height=\"22\" view-box=\"0 0 100 20\" width=\"202\"><rect fill=\"red\" height=\"20\" rx=\"5\" ry=\"5\" stroke=\"black\" width=\"74\" x=\"1\" y=\"1\"></rect></svg></p><p>Server memory usage:<svg height=\"22\" view-box=\"0 0 100 20\" width=\"202\"><rect fill=\"red\" height=\"20\" rx=\"5\" ry=\"5\" stroke=\"black\" width=\"75\" x=\"1\" y=\"1\"></rect></svg></p><p>Durable pending messages<svg height=\"22\" view-box=\"0 0 100 20\" width=\"202\"><rect fill=\"red\" height=\"20\" rx=\"5\" ry=\"5\" stroke=\"black\" width=\"92\" x=\"1\" y=\"1\"></rect></svg></p></div></div></div></body></head></html>"
+
+
+
+;; Iterate over locations to populate a drop-down
+
+(for [location data-centre-locations]
+  [:option {:value (:name location)} (:name location)])
+;; => ([:option {:value "London"} "London"] [:option {:value "New York"} "New York"] [:option {:value "Singapore"} "Singapore"])
+
+
+
