@@ -87,6 +87,11 @@
      [:div {:class "jumbotron"}
       [:h1 "Mock Status Monitor Dashboard"]]
 
+     ;; Key systems to monitor displayed in a single bootstrap row, with 3 columns.
+     [:div {:class "row"}
+      [:div {:class "col-md-12"}
+       [:h2 "ACME Infrastructure Locations"]
+       (web-form/drop-down ["London" "New York"] ["London" "New York"]) ]]
 
      ] ;; End of :div container
     ] ;; End of :body
@@ -166,6 +171,7 @@
              [:div
               svg-components/eclipse]
              ]]]]))
+
 
 
 
