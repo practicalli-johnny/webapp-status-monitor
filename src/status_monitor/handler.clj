@@ -7,7 +7,6 @@
             [status-monitor.svg-components :as svg-components]))
 
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Mock data generators
 
@@ -66,6 +65,35 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Main page for application
 
+(defn welcome-page
+  "Returns a home page"
+  [request]
+  (web-page/html5
+   {:ng-app "Mock Status Monitor Web App"
+    :lang "en"}
+   [:head
+    [:title "ACME Infrastructure Mock Status"]
+
+    ;; Bootstrap CSS and JavaScript libraries from the Content Delivery Network
+    (web-page/include-css "//stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css")
+    (web-page/include-js  "//stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js")
+    (web-page/include-js  "//stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js")]
+
+   [:body
+    ;; An invisible container to create a default margin at each side of the web page
+    [:div {:class "container"}
+
+     ;; Page Header using a large central banner, called a Jumbotron
+     [:div {:class "jumbotron"}
+      [:h1 "Mock Status Monitor Dashboard"]]
+
+
+     ] ;; End of :div container
+    ] ;; End of :body
+   ))
+
+
+
 (defn monitor-dashboard
   "Returns a mock dashboard page using Hiccup and Bootstrap"
   [request]
@@ -122,7 +150,8 @@
             ;; Testing SVG components.
             [:div {:class "row"}
              [:h1 "Demo"]
-             [:div {:class "col-md-12"}
+
+            [:div {:class "col-md-12"}
               svg-components/circle-in-a-box]
              [:div {:class "col-md-12"}
               (svg-components/web-link "https://practicalli.github.io")]
@@ -134,6 +163,8 @@
                "https://raw.githubusercontent.com/jr0cket/london-clojurians-logo/master/london-clojurians-logo.png"
                "http://ldnclj.org")]
 
+             [:div
+              svg-components/eclipse]
              ]]]]))
 
 
@@ -142,7 +173,7 @@
 ;; Application routing
 
 (defroutes app-routes
-  (GET "/" [] "Hello World")
+  (GET "/" [] welcome-page)
   (GET "/dashboard" [] monitor-dashboard)
   (route/not-found "Not Found"))
 
