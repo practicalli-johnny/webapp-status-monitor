@@ -1,4 +1,5 @@
 (ns status-monitor.handler-test
+
   ^{:author "John Stevenson"
     :doc "Testing using clojure.test library.
 
@@ -14,7 +15,9 @@
          in a string describing the purpose of those assertions.
 
          The deftest macro contains test contexts and assertions,
-         grouping the tests for a particular public function."}
+         grouping the tests for a particular public function.
+
+         Tests are run with lein test or from your Clojure editor."}
 
   (:require [clojure.test :refer :all]
             [ring.mock.request :as mock]
