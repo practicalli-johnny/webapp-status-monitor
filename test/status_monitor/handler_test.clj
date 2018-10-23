@@ -25,7 +25,14 @@
   (testing "main route"
     (let [response (app (mock/request :get "/"))]
       (is (= (:status response) 200))
-      (is (= (:body response) "Hello World"))))
+      (is (string/includes?
+           (:body response)
+           "<title>ACME Infrastructure Mock Status</title>"))
+      (is (string/includes?
+           (:body response)
+           "<link href=\"//stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css\" rel=\"stylesheet\" type=\"text/css\">"))
+      (is (string/includes?
+           (:body response) "<div class=\"jumbotron\"><h1>Mock Status Monitor Dashboard</h1></div>"))))
 
   (testing "not-found route"
     (let [response (app (mock/request :get "/invalid"))]
