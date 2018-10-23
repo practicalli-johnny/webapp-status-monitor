@@ -98,11 +98,13 @@
       [:div {:class "col-md-12"}
        [:h2 "ACME Infrastructure Locations"]
        [:form {:action "/dashboard"}
-        [:td
-         [:select
+        [:div {:class "form-group"}
+         [:label "Choose data centre location to view"]
+         [:select {:class "form-control"}
           (for [location data-centre-locations]
-            [:option {:value (:name location)} (:name location)])]
-         [:input {:type "submit"} "Monitor Location"]]]]]
+            [:option {:value (:name location)} (:name location)])]]
+        (web-form/submit-button {:class "btn btn-outline-primary" :name "submit"} "View Dashboard")
+        ]]]
 
      ] ;; End of :div container
     ] ;; End of :body
